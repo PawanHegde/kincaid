@@ -10,6 +10,9 @@ documentation = "https://github.com/PawanHegde/kincaid"
 repository = "https://github.com/PawanHegde/kincaid"
 keywords = ["english", "flesch-kincaid", "readability", "syllable", "word-count"]
 categories = ["text-processing"]
+include = [
+    "src/**.rs",
+]
 
 [profile.release]
 opt-level = "s"
