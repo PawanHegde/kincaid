@@ -1,7 +1,7 @@
 [package]
 name = "kincaid"
 description = "A word statistics library in Rust"
-version = "0.2.2"
+version = "0.2.3"
 license = "MIT"
 authors = ["Pawan Hegde <contact@pawanhegde.com>"]
 edition = "2018"
@@ -14,9 +14,14 @@ include = [
     "src/**.rs",
 ]
 
+[lib]
+crate-type = ["cdylib", "rlib"]
+
 [profile.release]
 opt-level = "s"
 
 [dependencies]
 regex="1"
 lazy_static="1"
+wasm-bindgen = "0.2"
+wee_alloc = "0.4"
