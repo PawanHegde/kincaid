@@ -1,7 +1,7 @@
+mod utils;
+
 #[macro_use]
 extern crate lazy_static;
-extern crate regex;
-extern crate wee_alloc;
 
 use regex::Regex;
 use regex::RegexBuilder;
@@ -9,7 +9,9 @@ use regex::RegexSet;
 use regex::RegexSetBuilder;
 use wasm_bindgen::prelude::*;
 
-// Use `wee_alloc` as the global allocator.
+// When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
+// allocator.
+#[cfg(feature = "wee_alloc")]
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
