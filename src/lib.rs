@@ -281,7 +281,7 @@ fn syllables_in_word(word: &str) -> usize {
 }
 
 #[wasm_bindgen]
-pub fn flesh_kincaid_reading_ease_score(text: &str) -> f32 {
+pub fn flesch_reading_ease_score(text: &str) -> f32 {
     let word_count = word_count(text);
     let sentence_count = sentence_count(text);
     let syllables_in_text = syllables_in_text(text);
