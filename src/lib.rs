@@ -7,6 +7,7 @@ use regex::Regex;
 use regex::RegexBuilder;
 use regex::RegexSet;
 use regex::RegexSetBuilder;
+use std::cmp::max;
 use wasm_bindgen::prelude::*;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
@@ -16,7 +17,7 @@ use wasm_bindgen::prelude::*;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 pub const WORD_PATTERN: &str = r"\b(\p{L}+(?:[-']\p{L}+)?)\b";
-pub const SENTENCE_PATTERN: &str = r"[^.?!]";
+pub const SENTENCE_PATTERN: &str = r"[.?!]+";
 pub const VOWEL_GROUPS_PATTERN: &str = r"[aeiou]+";
 
 lazy_static! {
@@ -257,7 +258,7 @@ pub fn word_count(text: &str) -> usize {
 
 #[wasm_bindgen]
 pub fn sentence_count(text: &str) -> usize {
-    SENTENCE_REGEX.find_iter(text).count()
+    max(SENTENCE_REGEX.find_iter(text).count(), 1)
 }
 
 #[wasm_bindgen]
