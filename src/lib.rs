@@ -1,5 +1,3 @@
-mod utils;
-
 #[macro_use]
 extern crate lazy_static;
 
@@ -8,13 +6,6 @@ use regex::RegexBuilder;
 use regex::RegexSet;
 use regex::RegexSetBuilder;
 use std::cmp::max;
-use wasm_bindgen::prelude::*;
-
-// When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
-// allocator.
-#[cfg(feature = "wee_alloc")]
-#[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 pub const WORD_PATTERN: &str = r"\b(\p{L}+(?:[-']\p{L}+)?)\b";
 pub const SENTENCE_PATTERN: &str = r"[.?!]+";
@@ -251,17 +242,14 @@ fn regexset_builder(patterns: &[&str]) -> RegexSet {
         .unwrap()
 }
 
-#[wasm_bindgen]
 pub fn word_count(text: &str) -> usize {
     WORD_REGEX.find_iter(text).count()
 }
 
-#[wasm_bindgen]
 pub fn sentence_count(text: &str) -> usize {
     max(SENTENCE_REGEX.find_iter(text).count(), 1)
 }
 
-#[wasm_bindgen]
 pub fn syllables_in_text(text: &str) -> usize {
     WORD_REGEX
         .find_iter(text)
@@ -280,7 +268,6 @@ fn syllables_in_word(word: &str) -> usize {
     return vowel_groups + add_count - minus_count;
 }
 
-#[wasm_bindgen]
 pub fn flesch_reading_ease_score(text: &str) -> f32 {
     let word_count = word_count(text);
     let sentence_count = sentence_count(text);

@@ -5,4 +5,4 @@
 
 ## About
 
-A text statistics library for Webassembly and Rust
+A text statistics library for Rust
